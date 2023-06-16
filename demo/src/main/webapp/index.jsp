@@ -19,13 +19,16 @@
         }
 
         .square {
-            width: 400px;
-            height: 400px;
+            width: 80%;
+            height: 80%;
+            max-width: 500px;
+            max-height: 500px;
             background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .logo {
@@ -58,20 +61,24 @@
         }
     </style>
 </head>
-<body>
+<body class="d-flex">
 <div class="container">
-    <div class="row">
+    <div class="container flex-grow-1">
         <div class="col-md-12 center-block">
             <div class="square">
                 <div>
+                    <br>
                     <img src="logo.png" class="logo">
                     <div class="welcome-text">Bienvenido Televiajero</div>
-                    <form>
+                    <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/LoginServlet">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Usuario">
+                            <input type="text" name="inputEmail" class="form-control" placeholder="Usuario">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Contraseña">
+                            <input type="password" name="inputPassword" class="form-control" placeholder="Contraseña">
+                            <%if(request.getParameter("error")!=null){%>
+                            <p class="text-danger">Danger link</p>
+                            <%}%>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-ingresar">Ingresar</button>
