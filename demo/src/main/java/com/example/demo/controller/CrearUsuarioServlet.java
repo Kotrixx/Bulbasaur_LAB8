@@ -27,4 +27,45 @@ public class CrearUsuarioServlet extends HttpServlet {
 
 
 
+
+    public Usuario parseJugador(HttpServletRequest request) {
+
+        Usuario usuario = new Usuario();
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String edadstr = request.getParameter("edad");
+        String codigostr = request.getParameter("codigo");
+        String correo = request.getParameter("correo");
+        String especialidad = request.getParameter("especialidad");
+        String contrasenha = request.getParameter("contrasenha");
+
+        String contrasenha_repetida =request.getParameter("contrasenha_repetida");
+
+
+        try {
+            int edad = Integer.parseInt(edadstr);
+            int codigo = Integer.parseInt(codigostr);
+
+            usuario.setNombre(nombre);
+            usuario.setApellido(apellido);
+            usuario.setEdad(edad);
+            usuario.setCodigo(codigo);
+            usuario.setCorreo(correo);
+            usuario.setEspecialidad(especialidad);
+            usuario.setContrasenha(contrasenha);
+
+
+            if(contrasenha_repetida.equals(contrasenha)){
+                return null;
+            }
+
+
+            return usuario;
+
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+
 }
