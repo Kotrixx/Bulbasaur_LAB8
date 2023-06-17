@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 
             session.setMaxInactiveInterval(300);//en segundos
 
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/hello-servlet");
         } else { //usuario o password incorrectos
             System.out.println("llegooo");
             request.setAttribute("error", "Usuario o password incorrectos");

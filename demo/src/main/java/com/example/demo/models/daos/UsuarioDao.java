@@ -33,15 +33,15 @@ public class UsuarioDao extends BaseDao{
     }
 
     private void fetchUsuarioData(Usuario usuario, ResultSet rs) throws SQLException {
-        usuario.setIdUsuario(rs.getInt(1));
-        usuario.setCorreo(rs.getString(2));
-        usuario.setNombre(rs.getString(3));
-        usuario.setApellido(rs.getString(4));
-        usuario.setContrasenha(rs.getString(5));
-        usuario.setStatus(rs.getString(6));
-        usuario.setEdad(rs.getInt(7));
-        usuario.setCodigo(rs.getInt(8));
-        usuario.setEspecialidad(rs.getString(9));
+        usuario.setIdUsuario(rs.getInt("idUsuario"));
+        usuario.setCorreo(rs.getString("correo"));
+        usuario.setNombre(rs.getString("nombre"));
+        usuario.setApellido(rs.getString("apellido"));
+        usuario.setContrasenha(rs.getString("contrasenha_hashed"));
+        usuario.setStatus(rs.getString("status"));
+        usuario.setEdad(rs.getInt("edad"));
+        usuario.setCodigo(rs.getInt("codigo"));
+        usuario.setEspecialidad(rs.getString("especialidad"));
         //usuario.setContrasenhaHashed();
         /*
         Job job = new Job();
