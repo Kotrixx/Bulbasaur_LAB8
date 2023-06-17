@@ -18,13 +18,25 @@ public class LoginServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
 
+            if (session == null){
+                System.out.println("nilolkdasd");
+            }
+
+            if (session.getAttribute("usuarioLog") == null){
+                System.out.println("no hay usuario");
+            }
+
             if(session != null && session.getAttribute("usuarioLog") != null){
+                System.out.println("pasa el if pe");
 
                 Usuario usuario = (Usuario) session.getAttribute("usuarioLog");
 
                 if(usuario.getIdUsuario()>0){ //estoy loggedIn
+                    System.out.println("si hay una id mayor a 0");
                     response.sendRedirect(request.getContextPath() + "/hello-servlet");
                 }else{ // no estoy loggedId
+                    System.out.println("no estoy logged wtf xd");
+
                     RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                     dispatcher.forward(request, response);
                 }

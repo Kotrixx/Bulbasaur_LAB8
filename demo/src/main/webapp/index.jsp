@@ -78,8 +78,8 @@
                         </div>
                         <div class="form-group">
                             <input type="password" name="inputPassword" class="form-control" placeholder="Contraseña">
-                            <%if(request.getParameter("error")!=null){%>
-                            <p class="text-danger">Danger link</p>
+                            <%if(request.getAttribute("error")!=null){%>
+                            <p class="text-danger">Credenciales incorrectas</p>
                             <%}%>
                         </div>
                         <div class="text-center">
