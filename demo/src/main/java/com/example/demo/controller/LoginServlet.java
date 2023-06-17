@@ -58,13 +58,14 @@ public class LoginServlet extends HttpServlet {
 
         if (usuario != null) { //usuario y password correctos
             HttpSession session = request.getSession();
+            System.out.println("bien");
             session.setAttribute("usuarioLog", usuario);
 
             session.setMaxInactiveInterval(300);//en segundos
 
             response.sendRedirect(request.getContextPath() + "/hello-servlet");
         } else { //usuario o password incorrectos
-            System.out.println("llegooo");
+            System.out.println("mal");
             request.setAttribute("error", "Usuario o password incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }

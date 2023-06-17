@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Página con cuadrado negro centrado</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Login Televiajes</title>
+    <jsp:include page="includes/headCSS.jsp"></jsp:include>
+    <%--
     <style>
         body {
-            background-image: url("fondo.jpg");
+            background-image: url("resources/img/fondo.jpg");
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -61,7 +62,7 @@
             color: white;
             text-align: center;
         }
-    </style>
+    </style>--%>
 </head>
 <body class="d-flex">
 <div class="container">
@@ -70,14 +71,14 @@
             <div class="square">
                 <div>
                     <br>
-                    <img src="logo.png" class="logo">
+                    <img src="resources/img/logo.png" class="logo">
                     <div class="welcome-text">Bienvenido Televiajero</div>
                     <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/LoginServlet">
                         <div class="form-group">
-                            <input type="text" name="inputEmail" class="form-control" placeholder="Usuario">
+                            <input type="text" name="inputEmail" required aria-label="inputEmail" class="form-control" placeholder="Usuario">
                         </div>
                         <div class="form-group">
-                            <input type="password" name="inputPassword" class="form-control" placeholder="Contraseña">
+                            <input type="password" name="inputPassword" required aria-label="inputPassword" class="form-control" placeholder="Contraseña">
                             <%if(request.getAttribute("error")!=null){%>
                             <p class="text-danger">Credenciales incorrectas</p>
                             <%}%>
@@ -95,6 +96,7 @@
     </div>
 </div>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--%>
+<jsp:include page="/includes/footer2.jsp"/>
 </body>
 </html>
