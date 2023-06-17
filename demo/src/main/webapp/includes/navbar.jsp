@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Kots
-  Date: 6/17/2023
-  Time: 3:53 AM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Navigation-->
 <nav class="navbar navbar-light static-top" style="background-color: gold">

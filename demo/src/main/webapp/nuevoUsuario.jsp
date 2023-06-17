@@ -88,7 +88,7 @@
                 <div>
                     <br>
                     <div class="welcome-text">Crea un nuevo usuario</div>
-                    <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/LoginServlet">
+                    <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/CrearUsuarioServlet">
                         <div class="mb-3">
                             <label class='text-light' for="nombre">Nombre</label>
                             <input type="text" class="form-control" name="nombre" id="nombre">
@@ -118,8 +118,8 @@
                             <input type="text" class="form-control" name="contrasenha" id="contrasenha">
                         </div>
                         <div class="mb-3">
-                            <label class='text-light' for="contrasenha_confirma">Confirme contraseña</label>
-                            <input type="text" class="form-control" name="contrasenha_confirma" id="contrasenha_confirma">
+                            <label class='text-light' for="contrasenha_repetida">Confirme contraseña</label>
+                            <input type="text" class="form-control" name="contrasenha_repetida" id="contrasenha_repetida">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn-ingresar btn-lg">Crear</button>

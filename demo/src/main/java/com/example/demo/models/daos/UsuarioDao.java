@@ -1,5 +1,9 @@
 package com.example.demo.models.daos;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import com.example.demo.models.beans.Usuario;
 
 import java.sql.Connection;
@@ -31,6 +35,64 @@ public class UsuarioDao extends BaseDao{
 
         return usuario;
     }
+
+
+
+    public void guardar (Usuario usuario){
+
+        String sql = "INSERT INTO usuario (correo,nombre,apellido,contrasenha, contrasenha_hashed, status, edad, codigo, especialidad) \n" +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection connection = getConection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+
+            pstmt.setString(1,usuario.getCorreo());
+            pstmt.setString(2,usuario.getNombre());
+            pstmt.setString(3,usuario.getApellido());
+            pstmt.setString(4,usuario.getContrasenha());
+
+            //creo el hash
+            pstmt.setString(5,convertirAHash(usuario.getContrasenha()));
+            pstmt.setString(6,usuario.getStatus());
+            pstmt.setInt(7,usuario.getEdad());
+            pstmt.setInt(8,usuario.getCodigo());
+            pstmt.setString(9,usuario.getEspecialidad());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+
+
+    //esta funcion cambia un string aun hash y luego te devuelve un string de ese hash
+    public static String convertirAHash(String contrasenha) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(contrasenha.getBytes(StandardCharsets.UTF_8));
+
+            // Convertir el hash a una representación en formato hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     private void fetchUsuarioData(Usuario usuario, ResultSet rs) throws SQLException {
         usuario.setIdUsuario(rs.getInt("idUsuario"));
@@ -70,7 +132,7 @@ public class UsuarioDao extends BaseDao{
         Usuario usuario = null;
 
         String sql = "select * from usuario\n" +
-                "where correo = ? and contrasenha_hashed = SHA2(?,256) ;";
+                "where correo = ? and contrasenha_hashed = SHA2(?,256) and  especialidad = 'Ingeniería de Telecomunicaciones';";
         try (Connection connection = getConection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);
