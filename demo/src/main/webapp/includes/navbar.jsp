@@ -2,7 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session" class="com.example.demo.models.beans.Usuario"/>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #bf930d!important;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light"
+     <%--
+        <%String status; switch (status){ %>
+        <%case "Normal":%>
+          style='background-color: #bf930d!important;'>
+        <%break; case "Silver": %>
+          style='background-color: #bf930d!important;'>
+        --%>
+      <%if()%>
+     style="background-color: #bf930d!important;">
+
+    <%else if (usuarioSession.getStatus().equals("Normal")){%>
+    style="background-color: #bf930d!important;">
+    <%}%>
+    <%if(usuarioSession.getStatus().equals("Normal")){%>
+    style="background-color: #bf930d!important;">
+    <%}%>
 
 
   <div class="container px-4 px-lg-5">
@@ -20,7 +36,8 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link">Hola! <%=usuarioSession.getNombre()+" "+usuarioSession.getApellido()%> , usted actualmente es usuario: <b>Gold</b></a></li>
+        <li class="nav-item"><a class="nav-link">Hola! <b><i><%=usuarioSession.getNombre()+" "+usuarioSession.getApellido()%></i></b>,
+          usted actualmente es usuario: <b><i><%=usuarioSession.getStatus()%></i></b></a></li>
         <li class="nav-item dropdown">
           <a class="nav-link"  href="<%=request.getContextPath()%>/LoginServlet?action=logout" style="color: darkred;"><b>Cerrar sesion</b></a>
 
