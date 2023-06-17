@@ -16,33 +16,22 @@ public class LoginServlet extends HttpServlet {
 
         if (action.equals("login")) {
 
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
 
-            if (session == null){
-                System.out.println("nilolkdasd");
-            }
+            if(session != null && session.getAttribute("usuarioSession") != null){
 
-            if (session.getAttribute("usuarioLog") == null){
-                System.out.println("no hay usuario");
-            }
-
-            if(session != null && session.getAttribute("usuarioLog") != null){
-                System.out.println("pasa el if pe");
-
-                Usuario usuario = (Usuario) session.getAttribute("usuarioLog");
+                Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
 
                 if(usuario.getIdUsuario()>0){ //estoy loggedIn
-                    System.out.println("si hay una id mayor a 0");
-                    response.sendRedirect(request.getContextPath() + "/hello-servlet");
+                    response.sendRedirect(request.getContextPath() + "/main-page");
                 }else{ // no estoy loggedId
-                    System.out.println("no estoy logged wtf xd");
-
                     RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
                     dispatcher.forward(request, response);
                 }
             }
         }else{ //logout
-            request.getSession().invalidate();
+            HttpSession session = request.getSession(false);
+            session.invalidate();
             response.sendRedirect(request.getContextPath());
         }
     }
@@ -59,15 +48,16 @@ public class LoginServlet extends HttpServlet {
         if (usuario != null) { //usuario y password correctos
             HttpSession session = request.getSession();
             System.out.println("bien");
-            session.setAttribute("usuarioLog", usuario);
 
+            session.setAttribute("usuarioSession", usuario);
             session.setMaxInactiveInterval(300);//en segundos
 
-            response.sendRedirect(request.getContextPath() + "/hello-servlet");
+            response.sendRedirect(request.getContextPath() + "/main-page");
         } else { //usuario o password incorrectos
             System.out.println("mal");
             request.setAttribute("error", "Usuario o password incorrectos");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
+
 }

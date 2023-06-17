@@ -4,67 +4,11 @@
 <head>
     <title>Login Televiajes</title>
     <jsp:include page="includes/headCSS.jsp"></jsp:include>
-    <%--
-    <style>
-        body {
-            background-image: url("resources/img/fondo.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .center-block {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .square {
-            width: 80%;
-            height: 80%;
-            max-width: 500px;
-            max-height: 500px;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .logo {
-            max-width: 200px;
-            max-height: 200px;
-            height: auto;
-            width: auto;
-            margin-bottom: 20px;
-        }
-
-        .welcome-text {
-            color: white;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .btn-ingresar {
-            background-color: black;
-            color: #00ccff;
-            border-radius: 20px;
-            border: 2px solid #00ccff;
-            margin-bottom: 20px;
-        }
-
-        .register-link {
-            color: white;
-            text-align: center;
-        }
-    </style>--%>
 </head>
 <body class="d-flex">
+<jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session"
+             class="com.example.demo.models.beans.Usuario"/>
+
 <div class="container">
     <div class="container flex-grow-1">
         <div class="col-md-12 center-block">

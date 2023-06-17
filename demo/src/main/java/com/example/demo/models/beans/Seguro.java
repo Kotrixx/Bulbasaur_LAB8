@@ -2,7 +2,7 @@ package com.example.demo.models.beans;
 
 public class Seguro {
     private int idSeguro;
-    private int nombre;
+    private String nombre;
 
     public int getIdSeguro() {
         return idSeguro;
@@ -12,11 +12,11 @@ public class Seguro {
         this.idSeguro = idSeguro;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 }

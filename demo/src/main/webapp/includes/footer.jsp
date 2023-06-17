@@ -1,9 +1,9 @@
 <!-- Bootstrap core JS-->
-<footer class="footer bg-light">
+<footer class="footer bg-dark">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023.</p>
+                <p class="text-muted small mb-4 mb-lg-0">&copy;Website de bulbasaur team</p>
             </div>
         </div>
     </div>
