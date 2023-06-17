@@ -50,8 +50,10 @@
         }
 
         .btn-ingresar {
-            background-color: #007bff;
-            color: white;
+            background-color: black;
+            color: #00ccff;
+            border-radius: 20px;
+            border: 2px solid #00ccff;
             margin-bottom: 20px;
         }
 
@@ -81,7 +83,7 @@
                             <%}%>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-ingresar">Ingresar</button>
+                            <button type="submit" class="btn-ingresar">Ingresar</button>
                             <div class="register-link">
                                 <a href="#">Soy nuevo y quiero registrarme</a>
                             </div>
