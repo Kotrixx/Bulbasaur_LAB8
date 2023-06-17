@@ -70,7 +70,7 @@ public class UsuarioDao extends BaseDao{
         Usuario usuario = null;
 
         String sql = "select * from usuario\n" +
-                "where correo = ? and contrasenha_hashed = SHA2(?,256);";
+                "where correo = ? and contrasenha_hashed = SHA2(?,256) and especialidad = 'Ingeniería de Telecomunicaciones'";
         try (Connection connection = getConection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, username);

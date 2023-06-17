@@ -85,7 +85,7 @@
                         <div class="text-center">
                             <button type="submit" class="btn-ingresar">Ingresar</button>
                             <div class="register-link">
-                                <a href="#">Soy nuevo y quiero registrarme</a>
+                                <a href="<%=request.getContextPath()%>/CrearUsuarioServlet">Soy nuevo y quiero registrarme</a>
                             </div>
                         </div>
                     </form>
