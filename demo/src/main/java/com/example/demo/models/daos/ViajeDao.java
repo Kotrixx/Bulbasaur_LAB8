@@ -56,7 +56,7 @@ public class ViajeDao extends BaseDao{
 
     }
 
-    public void crearViaje( ) throws SQLException {
+    public void crearViaje( ) {
         Viaje viaje = new Viaje();
         String sql = "INSERT INTO viaje (idViaje,fechaViaje,fechaReserva,costoTotal,cantBoletos,\n" +
                 "Seguro_idSeguro,ciudadOrigen,ciudadDestino,Usuario_idUsuario) "
@@ -79,24 +79,22 @@ public class ViajeDao extends BaseDao{
         }
     }
 
-    public void editarViaje(int idViaje) throws SQLException {
-        Viaje viaje = new Viaje();
+    public void editarViaje(Viaje viaje) throws SQLException{
         String sql = "UPDATE viaje SET\n" +
-                "fechaViaje=?,fechaReserva=?,costoTotal=?,cantBoletos=?,\n" +
+                "fechaViaje=?,costoTotal=?,cantBoletos=?,\n" +
                 "Seguro_idSeguro=?,ciudadOrigen=?,ciudadDestino=?\n" +
                 "where idViaje = ?;";
 
         try (Connection conn = this.getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            pstmt.setInt(1, viaje.getIdViaje());
-            pstmt.setDate(2, viaje.getFechaViaje());
-            pstmt.setDate(3, viaje.getFechaReserva());
-            pstmt.setBigDecimal(4, viaje.getCostoTotal());
-            pstmt.setInt(5, viaje.getCantBoletos());
-            pstmt.setInt(6, viaje.getIdSeguro());
-            pstmt.setString(7,viaje.getCiudadOrigen());
-            pstmt.setString(8,viaje.getCiudadDestino());
-            pstmt.setInt(9,idViaje);
+
+            pstmt.setDate(1, viaje.getFechaViaje());
+            pstmt.setBigDecimal(2, viaje.getCostoTotal());
+            pstmt.setInt(3, viaje.getCantBoletos());
+            pstmt.setInt(4, viaje.getIdSeguro());
+            pstmt.setString(5,viaje.getCiudadOrigen());
+            pstmt.setString(6,viaje.getCiudadDestino());
+            pstmt.setInt(7,viaje.getIdViaje());
             pstmt.executeUpdate();
         }
     }
@@ -114,7 +112,7 @@ public class ViajeDao extends BaseDao{
         }
     }
 
-    public Viaje obtenerViaje(int idViaje) throws SQLException {
+    public Viaje obtenerViaje(int idViaje) {
         Viaje viaje = new Viaje();
         String sql = "SELECT * FROM lab8_bulbasaur.viaje \n" +
                 "WHERE idViaje = ?";
@@ -135,10 +133,6 @@ public class ViajeDao extends BaseDao{
                 viaje.setCiudadOrigen(rs.getString(8));
                 viaje.setCiudadDestino(rs.getString(9));
                 viaje.setIdUsuario(rs.getInt(10));
-
-                Seguro seguro = new Seguro();
-                seguro.setNombre(rs.getString(11));
-                viaje.setSeguro(seguro);
             }
         }
         catch (SQLException ex) {

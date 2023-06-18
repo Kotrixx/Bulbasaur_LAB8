@@ -2,14 +2,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session" class="com.example.demo.models.beans.Usuario"/>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light"
-     <%--
-        <%String status; switch (status){ %>
-        <%case "Normal":%>
-          style='background-color: #bf930d!important;'>
-        <%break; case "Silver": %>
-          style='background-color: #bf930d!important;'>
-        --%>
+<nav class="navbar navbar-expand-lg navbar-dark text-bg-light"
+<%--
+   <%String status; switch (status){ %>
+   <%case "Normal":%>
+     style='background-color: #bf930d!important;'>
+   <%break; case "Silver": %>
+     style='background-color: #bf930d!important;'>
+   --%>
+
+        <%if(usuarioSession.getStatus().equals("Normal")){%>
+     style="background-color: royalblue!important;"
+        <%}%>
+        <%if(usuarioSession.getStatus().equals("Silver")){%>
+     style="background-color: #5b5b5b!important;"
+        <%}%>
+        <%if(usuarioSession.getStatus().equals("Gold")){%>
+     style="background-color: #bf930d!important;"
+        <%}%>
+        <%if(usuarioSession.getStatus().equals("Platinum")){%>
+     style="background-color: black!important;"
+<%}%>
 
 
   <div class="container px-4 px-lg-5">

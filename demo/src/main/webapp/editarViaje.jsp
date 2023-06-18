@@ -1,5 +1,7 @@
 <%@ page import="com.example.demo.models.beans.Seguro" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.demo.models.beans.Viaje" %>
+<%@ page import="java.math.BigDecimal" %><%--
   Created by IntelliJ IDEA.
   User: Kots
   Date: 6/17/2023
@@ -8,6 +10,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%ArrayList<Seguro> listaSeguros = (ArrayList<Seguro>) request.getAttribute("listaSeguros");%>
+<%Viaje viaje = (Viaje)request.getAttribute("viaje");%>
 <html>
 <head>
     <title>Televiajes</title>
@@ -48,7 +51,7 @@
 </section>
 
 
-<section class="py-8" style="background-image: url('resources/img/fondoViaje2.jpg')">
+<section class="py-8" style="background-image: url('resources/img/Modelos de vehículos en mapas_ _ Foto Premium.jpg')">
     <br><br><br><br>
 
     <div class="container">
@@ -56,24 +59,24 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="imagen-container">
-                    <img src="resources/img/Nueva-York-NIGHT-2.jpg" alt="Imagen" class="card-img-top mb-5 mb-md-0">
+                    <img src="resources/img/istockphoto-1153849876-612x612.jpg" alt="Imagen" class="card-img-top mb-5 mb-md-0">
                 </div>
 
 
             </div>
             <div class="col-sm-6">
-                <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/CrearUsuarioServlet">
+                <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/main-page?action=edita">
                     <!-- Contenido del formulario -->
 
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="ciudadOrigen">Cuidad origen:</label>
-                                <input type="text" name="ciudadOrigen" required aria-label="ciudadOrigen" class="form-control" placeholder="Cuidad origen">
+                                <input type="text" name="ciudadOrigen" required aria-label="ciudadOrigen" class="form-control" value="<%=viaje.getCiudadOrigen()%>">
                             </div>
                             <div class="col-sm-6">
                                 <label for="cuidadDestino">Ciudad destino:</label>
-                                <input type="email" name="cuidadDestino" required aria-label="cuidadDestino" class="form-control" placeholder="Cuidad destino">
+                                <input type="text" name="cuidadDestino" required aria-label="cuidadDestino" class="form-control" value="<%=viaje.getCiudadDestino()%>">
                             </div>
                         </div>
                     </div>
@@ -82,25 +85,25 @@
                             <div class="col-sm-8">
 
                                 <label for="fechaViaje">Fecha de viaje:</label>
-                                <input type="text" name="fechaViaje" required aria-label="fechaViaje" class="form-control" placeholder="Fecha de viaje">
+                                <input type="text" name="fechaViaje" required aria-label="fechaViaje" class="form-control" value="<%=viaje.getFechaViaje()%>">
 
                             </div>
                             <div class="col-sm-4">
                                 <label for="numBoletos">Numero de boletos:</label>
-                                <input type="text" name="numBoletos" required aria-label="numBoletos" class="form-control" placeholder="Numero de boletos">
+                                <input type="text" name="numBoletos" required aria-label="numBoletos" class="form-control" value="<%=viaje.getCantBoletos()%>">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="costoTotal">Costo total:</label>
-                                <input type="text" name="costoTotal" required aria-label="costoTotal" class="form-control" placeholder="Costo total">
+                                <label for="costoTotal">Costo Boleto:</label>
+                                <%BigDecimal numeroDecimal = new BigDecimal(viaje.getCantBoletos());%>
+                                <input type="text" name="costoBoleto" required aria-label="costoBoleto" class="form-control" value="<%=viaje.getCostoTotal().divide(numeroDecimal)%>">
                             </div>
                             <div class="col-sm-6">
                                 <label for="enmpresaSeguros">Empresa de Seguros:</label>
                                 <select name="idSeguro" id="idSeguro" class="form-select">
-                                    <option value="0">Elija una empresa de seguros</option>
                                     <% for (Seguro seguro : listaSeguros) {%>
                                     <option value="<%=seguro.getIdSeguro()%>" <%--<%= empleado.getJob().getJobId().equals(job.getJobId()) ? "selected" : "" %>--%> >
                                         <%=seguro.getNombre()%>
@@ -112,8 +115,8 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <a type="submit" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-success" name="editar">Guardar</button>
+                        <a href="<%=request.getContextPath()%>/main-page" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
             </div>
