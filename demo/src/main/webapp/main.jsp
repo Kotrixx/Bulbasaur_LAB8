@@ -35,14 +35,13 @@
 
                     <!-- Busqueda-->
                     <div class="row">
-                        <form method="post" action="<%=request.getContextPath()%>/main-page?action=buscar">
+                        <form method="post" action="<%=request.getContextPath()%>/MainServlet?action=buscar">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Buscar por nombre" name="textoBuscar"
-                                       value="    "/>
+                                <input type="text" class="form-control" placeholder="Buscar por nombre" name="textoBuscar"/>
                                 <button class="input-group-text" type="submit">
                                     <i class="bi bi-search"></i>
                                 </button>
-                                <a class="input-group-text" href="<%=request.getContextPath()%>/main-page">
+                                <a class="input-group-text" href="<%=request.getContextPath()%>/MainServlet">
                                     <i class="bi bi-x-circle"></i>
                                 </a>
                             </div>

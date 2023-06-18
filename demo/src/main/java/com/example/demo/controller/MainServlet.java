@@ -73,5 +73,32 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String action = request.getParameter("action") != null ? request.getParameter("action") : "buscar";
+
+        ViajeDao viajeDao = new ViajeDao();
+
+        switch (action) {
+            case "buscar":
+                //aca buscare y listare lo q haya
+
+                String textoBuscar = request.getParameter("textoBuscar"); //asimismo
+                //se guarda un parametro con name textoBuscar el cual se usará
+
+                System.out.println(textoBuscar);
+                HttpSession session = request.getSession(false);
+                Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+                request.setAttribute("lista", viajeDao.buscarPorTitle(textoBuscar,usuario));//ese texto lo meteré a la funcion
+                //finalmente haré que lista sea una lista de solo lo que yo deseo
+                //y esa mostraré
+
+                request.getRequestDispatcher("main.jsp").forward(request, response);
+                break;
+
+
+        }
+
+
+
+
     }
 }
