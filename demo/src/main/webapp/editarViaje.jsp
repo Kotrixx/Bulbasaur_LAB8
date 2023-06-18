@@ -65,7 +65,7 @@
 
             </div>
             <div class="col-sm-6">
-                <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/main-page?action=edita">
+                <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/main-page?action=edita&id=<%=viaje.getIdViaje()%>">
                     <!-- Contenido del formulario -->
 
                     <div class="form-group">

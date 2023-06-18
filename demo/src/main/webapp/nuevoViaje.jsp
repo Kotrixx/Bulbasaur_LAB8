@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.example.demo.models.beans.Seguro" %><%--
+<%@ page import="com.example.demo.models.beans.Seguro" %>
+<%@ page import="com.example.demo.models.beans.Viaje" %><%--
   Created by IntelliJ IDEA.
   User: Kots
   Date: 6/17/2023
@@ -8,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%ArrayList<Seguro> listaSeguros = (ArrayList<Seguro>) request.getAttribute("listaSeguros");%>
+<%Viaje viaje = (Viaje)request.getAttribute("viaje");%>
 <html>
 <head>
   <title>Televiajes</title>
@@ -62,7 +64,7 @@
 
       </div>
       <div class="col-sm-6">
-        <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/CrearUsuarioServlet">
+        <form class="form-signin" method="POST" action="<%=request.getContextPath()%>/main-page?action=add">
           <!-- Contenido del formulario -->
 
           <div class="form-group">

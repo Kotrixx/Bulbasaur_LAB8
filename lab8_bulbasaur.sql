@@ -47,8 +47,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `lab8_bulbasaur`.`Viaje` (
   `idViaje` INT NOT NULL AUTO_INCREMENT,
-  `fechaViaje` DATETIME NOT NULL,
-  `fechaReserva` DATETIME NOT NULL,
+  `fechaViaje` DATE NOT NULL,
+  `fechaReserva` DATE NOT NULL,
   `costoTotal` DECIMAL(10,2) NOT NULL,
   `precioBoletO` DECIMAL(10,2) NULL,
   `cantBoletos` INT NOT NULL,
@@ -79,10 +79,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 USE `lab8_bulbasaur` ;
 INSERT INTO `lab8_bulbasaur`.`Usuario` (`correo`, `nombre`, `apellido`,`contrasenha`, `contrasenha_hashed`, `status`, `edad`, `codigo`, `especialidad`)
-VALUES ('usuario1@pucp.edu.pe', 'Usuario', 'Uno','password1', SHA2('password1', 256), 'Normal', 20, 12345678, 'Telecomunicaciones'),
- ('usuario3@pucp.edu.pe', 'Usuario3', 'Tres','password3', SHA2('password3', 256), 'Silver', 28, 34567890, 'Telecomunicaciones'),
+VALUES ('usuario1@pucp.edu.pe', 'Usuario', 'Uno','password1', SHA2('password1', 256), 'Normal', 20, 12345678, 'Ingeniería de Telecomunicaciones'),
+ ('usuario3@pucp.edu.pe', 'Usuario3', 'Tres','password3', SHA2('password3', 256), 'Silver', 28, 34567890, 'Ingeniería de Telecomunicaciones'),
 ('usuario2@pucp.edu.pe', 'Usuario2', 'Dos','password2', SHA2('password2', 256), 'Gold', 25, 23456789, 'Ingeniería de Telecomunicaciones'),
- ('usuario4@pucp.edu.pe', 'Usuario4', 'Tres','password4', SHA2('password4', 256), 'Platinum', 28, 12312456, 'Telecomunicaciones');
+ ('usuario4@pucp.edu.pe', 'Usuario4', 'Tres','password4', SHA2('password4', 256), 'Platinum', 28, 12312456, 'Ingeniería de Telecomunicaciones');
 
 INSERT INTO `lab8_bulbasaur`.`Seguro` (`nombre`) VALUES 
 ('Rimac'),
@@ -91,7 +91,7 @@ INSERT INTO `lab8_bulbasaur`.`Seguro` (`nombre`) VALUES
 ('Seguro Internacional');
 
 INSERT INTO `lab8_bulbasaur`.`Viaje` (`idViaje`, `fechaViaje`, `fechaReserva`, `costoTotal`, `precioBoletO`, `cantBoletos`, `Seguro_idSeguro`, `ciudadOrigen`, `ciudadDestino`, `Usuario_idUsuario`) VALUES
-( 12114478, '2024-06-15 09:00:00', '2024-05-30 14:30:00', 0.00, 0.00, 0, 1, 'Lima', 'Cusco', 1),
-( 87654321, '2024-07-10 14:30:00', '2024-06-01 09:15:00', 374.50, 0.00, 1, 2, 'Lima', 'Arequipa', 2),
-( 13656244, '2024-09-25 10:30:00', '2024-08-10 13:20:00', 1278.90, 0.00, 3, 3, 'Lima', 'Piura', 3),
-( 46781457, '2024-06-25 10:30:00', '2024-08-26 13:20:00', 17842.90, 0.00, 15, 4, 'Lima', 'Trujillo', 4);
+( 12114478, '2024-06-15', '2024-05-30', 70.00, 0.00, 1, 1, 'Lima', 'Cusco', 1),
+( 87654321, '2024-07-10', '2024-06-01', 374.50, 0.00, 1, 2, 'Lima', 'Arequipa', 2),
+( 13656244, '2024-09-25', '2024-08-10', 1278.90, 0.00, 3, 3, 'Lima', 'Piura', 3),
+( 46781457, '2024-06-25', '2024-08-26', 17842.90, 0.00, 15, 4, 'Lima', 'Trujillo', 4);

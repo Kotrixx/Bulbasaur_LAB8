@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Random;
 import com.example.demo.models.beans.Seguro;
 import com.example.demo.models.beans.Usuario;
@@ -100,30 +101,26 @@ public class MainServlet extends HttpServlet {
                     request.getRequestDispatcher("nuevoViaje.jsp").forward(request, response);
                     break;
             }
-
         }
-
-
-
-
-
 
     }
     public void destroy() {
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ViajeDao viajeDao = new ViajeDao();
         String action = request.getParameter("action") != null ? request.getParameter("action") : "buscar";
+        HttpSession session = request.getSession(false);
+        Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
         switch (action) {
             case "buscar":
                 //aca buscare y listare lo q haya
                 String textoBuscar = request.getParameter("textoBuscar"); //asimismo
                 //se guarda un parametro con name textoBuscar el cual se usará
                 System.out.println(textoBuscar);
-                HttpSession session = request.getSession(false);
-                Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+                //HttpSession session = request.getSession(false);
+                //Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+
                 request.setAttribute("lista", viajeDao.buscarPorTitle(textoBuscar,usuario));//ese texto lo meteré a la funcion
                 //finalmente haré que lista sea una lista de solo lo que yo deseo
                 //y esa mostraré
@@ -147,47 +144,67 @@ public class MainServlet extends HttpServlet {
                 usuario = (Usuario) session.getAttribute("usuarioSession");
 
                 if (contrasenha.equals(usuario.getContrasenha())){
-                    //procedo a borrar
-                    ViajeDao viajeDao1 = new ViajeDao();
-                    viajeDao1.borrarViaje(Integer.parseInt(id));
+
+                    try {
+                        viajeDao.borrarViaje(Integer.parseInt(id));
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
 
                 }else{
                     response.sendRedirect(request.getContextPath()+"/main-page");
                     break;
                 }
+            case "add":
+                viaje = parseViaje(request);
+                if(viaje!=null){
+                    boolean  centinela2 = false,centinela3 = false,centinela4=false;
+                    iteracion: while(true){
+                        Random random = new Random();
+                        int numRandom = random.nextInt(90000000) + 10000000;
+                        int idViaje = numRandom;
+                        viaje.setIdViaje(idViaje);
+                        for(Viaje v: viajeDao.listarViajes(usuario)){
+                            if(v.getIdViaje()!=viaje.getIdViaje()){
+                                centinela2 = true;
+                                if(centinela2){
+                                    break iteracion;
+                                }
+                            }
+                        }
+                    }
+                    LocalDate fechaActual = LocalDate.now();
+                    Date fechaActualSql = Date.valueOf(fechaActual);
+                    viaje.setFechaReserva(fechaActualSql);
+                    if (viaje.getFechaViaje().compareTo(fechaActualSql) > 0) {
+                        centinela3 = true;
+                    } else {
+                        centinela3 = false;
+                    }
+                    centinela4 = viaje.getCantBoletos() >0? true : false;
+                    //cambio de status
+                    boolean comp = viaje.getCostoTotal().compareTo(BigDecimal.ZERO) != 0? true : false;
+                    boolean prueba = viaje.getFechaViaje()==null ||viaje.getCantBoletos()==0 || viaje.getIdSeguro()==0||viaje.getCantBoletos()==0
+                            || viaje.getCostoTotal()==null;
 
 
-        }
-
-
-
-
-        /*if(seleccion!=null){
-            boolean centinela = false;
-            //boolean prueba = true;
-            for(Seleccion selec: seleccionDao.listarSelecciones()){
-                if(selec.getNombre().equals(seleccion.getNombre())){
-                    centinela = true;
+                    if((centinela2 && centinela3 && centinela4) && !prueba){
+                        viajeDao.crearViaje(viaje);
+                        response.sendRedirect(request.getContextPath()+"/main-page");
+                    } else{
+                        response.sendRedirect(request.getContextPath()+"/main-page?action=add");
+                    }
                 }
-            }
-            boolean prueba = seleccion.getNombre().isEmpty() || seleccion.getTecnico().isEmpty() || seleccion.getEstadio().getEstadios_idEstadios()==0;
-
-            if(!centinela && !prueba){
-                seleccionDao.crearSeleccion(seleccion);
-                response.sendRedirect(request.getContextPath()+"/listaSelecciones");
-            } else{
-                response.sendRedirect(request.getContextPath()+"/creaSeleccion");
-            }
+                else{
+                    response.sendRedirect(request.getContextPath()+"/main-page?action=add");
+                }
         }
-        else{
-            response.sendRedirect(request.getContextPath()+"/creaSeleccion");
-        }*/
-
+        
     }
 
     public Viaje parseViaje(HttpServletRequest request) {
         Viaje viaje = new Viaje();
-        Random random = new Random();
+        //Random random = new Random();
         // Generar un número aleatorio de 8 dígitos
         //int digitoRnadom = random.nextInt(90000000) + 10000000;
         //int idViaje = digitoRnadom;

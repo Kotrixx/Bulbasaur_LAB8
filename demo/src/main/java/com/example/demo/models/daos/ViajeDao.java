@@ -56,8 +56,7 @@ public class ViajeDao extends BaseDao{
 
     }
 
-    public void crearViaje( ) {
-        Viaje viaje = new Viaje();
+    public void crearViaje(Viaje viaje) {
         String sql = "INSERT INTO viaje (idViaje,fechaViaje,fechaReserva,costoTotal,cantBoletos,\n" +
                 "Seguro_idSeguro,ciudadOrigen,ciudadDestino,Usuario_idUsuario) "
                 + "VALUES (?,?,?,?,?,?,?,?,?)";
@@ -75,7 +74,7 @@ public class ViajeDao extends BaseDao{
             pstmt.setInt(9,viaje.getIdUsuario());
             pstmt.executeUpdate();
         }catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
     }
 
