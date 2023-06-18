@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.models.beans.Usuario;
 import com.example.demo.models.daos.SeguroDao;
+import com.example.demo.models.daos.UsuarioDao;
+import com.example.demo.models.daos.ViajeDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -28,7 +31,18 @@ public class MainServlet extends HttpServlet {
             String action = request.getParameter("action") != null ? request.getParameter("action") : "main";
             switch (action) {
                 case "main":
+                    //si esta en el main va a listar las selecciones
+
+                    //voy a introducir el atributo usuarioSession debido a que ese sera el usaurio al que buscarle viajes
+                    Usuario usuario = (Usuario) session.getAttribute("usuarioSession");
+                    ViajeDao viajeDao = new ViajeDao();
+
+                    //aca se le setea el atributo lista que luego se va a importar con el usebean en el jsp
+                    request.setAttribute("lista",viajeDao.listarViajes(usuario));
+
                     request.getRequestDispatcher("main.jsp").forward(request, response);
+
+
                     break;
                 case "edit":
 

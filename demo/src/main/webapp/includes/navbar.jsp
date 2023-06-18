@@ -10,15 +10,6 @@
         <%break; case "Silver": %>
           style='background-color: #bf930d!important;'>
         --%>
-      <%if()%>
-     style="background-color: #bf930d!important;">
-
-    <%else if (usuarioSession.getStatus().equals("Normal")){%>
-    style="background-color: #bf930d!important;">
-    <%}%>
-    <%if(usuarioSession.getStatus().equals("Normal")){%>
-    style="background-color: #bf930d!important;">
-    <%}%>
 
 
   <div class="container px-4 px-lg-5">

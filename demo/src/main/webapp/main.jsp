@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.demo.models.beans.Viaje" %><%--
   Created by IntelliJ IDEA.
   User: Kots
   Date: 6/17/2023
@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session" class="com.example.demo.models.beans.Usuario"/>
+<jsp:useBean id="lista" scope="request" type="java.util.ArrayList<com.example.demo.models.beans.Viaje>"/>
 <html>
 <head>
     <title>Televiajes</title>
@@ -68,6 +69,7 @@
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2">
 
+            <% for (Viaje viaje : lista) { %>
             <div class="col">
                 <!-- Tarjeta 1 -->
                 <div class="card mb-3">
@@ -77,17 +79,17 @@
                             <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
                             <p></p>
                             <p>fecha-reserva:</p>
-                            <p></p>
+                            <p><%=viaje.getFechaReserva()%></p>
                             <p>fecha-salida:</p>
-                            <p></p>
+                            <p><%=viaje.getFechaViaje()%></p>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
+                                <h5 class="card-title"><b><%=viaje.getCiudadDestino()%> - <%=viaje.getCiudadOrigen()%></b> </h5>
+                                <p class="card-text"><small class="text-body-secondary">ID: <%=viaje.getIdViaje()%></small></p>
+                                <p class="card-text">Asegurado por <%=viaje.getSeguro().getNombre()%></p>
+                                <p class="card-text">Numero de boletos: <%=viaje.getCantBoletos()%></p>
+                                <p class="card-text">Precio: <%=viaje.getCostoTotal()%></p>
                                 <a  class="btn-ingresar" href="<%=request.getContextPath()%>/main-page?action=edit"> Editar viaje </a>
                                 <a class="btn-ingresar"href="<%=request.getContextPath()%>/main-page?action=del"> Eliminar viaje </a>
                             </div>
@@ -95,200 +97,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <!-- Tarjeta 2 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 1 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 2 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 1 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 2 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 1 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar"> Editar viaje </a>
-                                <a class="btn-ingresar"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Tarjeta 2 -->
-                <div class="card mb-3">
-                    <!-- Contenido de la tarjeta -->
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="resources/img/imagenViaje.png" class="img-fluid rounded-start" alt="...">
-                            <p></p>
-                            <p>fecha-reserva:</p>
-                            <p></p>
-                            <p>fecha-salida:</p>
-                            <p></p>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><b>Ciudad Destino - Ciudad Origen</b> </h5>
-                                <p class="card-text"><small class="text-body-secondary">ID: BST-498</small></p>
-                                <p class="card-text">Asegurado por ...</p>
-                                <p class="card-text">Numero de boletos: </p>
-                                <p class="card-text">Precio: </p>
-                                <a  class="btn-ingresar" href="<%=request.getContextPath()%>/"> Editar viaje </a>
-                                <a class="btn-ingresar" href="#"> Eliminar viaje </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Puedes agregar más columnas con tarjetas aquí -->
+            <% } %>
         </div>
     </div>
 
-    <br><br><br><br>
+    <br></br><br></br>
 </section>
 <!-- Image Showcases-->
 
