@@ -72,8 +72,8 @@
                                 <input type="text" name="ciudadOrigen" required aria-label="ciudadOrigen" class="form-control" placeholder="Cuidad origen">
                             </div>
                             <div class="col-sm-6">
-                                <label for="cuidadOrigen">Ciudad destino:</label>
-                                <input type="email" name="cuidadOrigen" required aria-label="cuidadOrigen" class="form-control" placeholder="Cuidad destino">
+                                <label for="cuidadDestino">Ciudad destino:</label>
+                                <input type="email" name="cuidadDestino" required aria-label="cuidadDestino" class="form-control" placeholder="Cuidad destino">
                             </div>
                         </div>
                     </div>

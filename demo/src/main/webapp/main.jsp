@@ -89,8 +89,8 @@
                                 <p class="card-text">Asegurado por <%=viaje.getSeguro().getNombre()%></p>
                                 <p class="card-text">Numero de boletos: <%=viaje.getCantBoletos()%></p>
                                 <p class="card-text">Precio: <%=viaje.getCostoTotal()%></p>
-                                <a  class="btn-ingresar" href="<%=request.getContextPath()%>/main-page?action=edit"> Editar viaje </a>
-                                <a class="btn-ingresar"href="<%=request.getContextPath()%>/main-page?action=del"> Eliminar viaje </a>
+                                <a  class="btn-ingresar" href="<%=request.getContextPath()%>/main-page?action=edit&id=<%=viaje.getIdViaje()%>"> Editar viaje </a>
+                                <a class="btn-ingresar"href="<%=request.getContextPath()%>/main-page?action=del&id=<%=viaje.getIdViaje()%>"> Eliminar viaje </a>
                             </div>
                         </div>
                     </div>

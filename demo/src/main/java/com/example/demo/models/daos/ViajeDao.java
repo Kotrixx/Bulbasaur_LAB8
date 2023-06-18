@@ -25,7 +25,6 @@ public class ViajeDao extends BaseDao{
             pstmt.setInt(1, usuario.getIdUsuario());
             ResultSet rs = pstmt.executeQuery();
 
-            //creare cada viaje
             while (rs.next()) {
                 Viaje viaje = new Viaje();
                 viaje.setIdViaje(rs.getInt(1));
@@ -57,6 +56,96 @@ public class ViajeDao extends BaseDao{
 
     }
 
+    public void crearViaje( ) throws SQLException {
+        Viaje viaje = new Viaje();
+        String sql = "INSERT INTO viaje (idViaje,fechaViaje,fechaReserva,costoTotal,cantBoletos,\n" +
+                "Seguro_idSeguro,ciudadOrigen,ciudadDestino,Usuario_idUsuario) "
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, viaje.getIdViaje());
+            pstmt.setDate(2, viaje.getFechaViaje());
+            pstmt.setDate(3, viaje.getFechaReserva());
+            pstmt.setBigDecimal(4, viaje.getCostoTotal());
+            pstmt.setInt(5, viaje.getCantBoletos());
+            pstmt.setInt(6, viaje.getIdSeguro());
+            pstmt.setString(7,viaje.getCiudadOrigen());
+            pstmt.setString(8,viaje.getCiudadDestino());
+            pstmt.setInt(9,viaje.getIdUsuario());
+            pstmt.executeUpdate();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void editarViaje(int idViaje) throws SQLException {
+        Viaje viaje = new Viaje();
+        String sql = "UPDATE viaje SET\n" +
+                "fechaViaje=?,fechaReserva=?,costoTotal=?,cantBoletos=?,\n" +
+                "Seguro_idSeguro=?,ciudadOrigen=?,ciudadDestino=?\n" +
+                "where idViaje = ?;";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1, viaje.getIdViaje());
+            pstmt.setDate(2, viaje.getFechaViaje());
+            pstmt.setDate(3, viaje.getFechaReserva());
+            pstmt.setBigDecimal(4, viaje.getCostoTotal());
+            pstmt.setInt(5, viaje.getCantBoletos());
+            pstmt.setInt(6, viaje.getIdSeguro());
+            pstmt.setString(7,viaje.getCiudadOrigen());
+            pstmt.setString(8,viaje.getCiudadDestino());
+            pstmt.setInt(9,idViaje);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public void borrarViaje(int idViaje) throws SQLException {
+        Viaje viaje = new Viaje();
+        String sql = "DELETE FROM viaje WHERE  idViaje = ? ";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idViaje);
+            pstmt.executeUpdate();
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Viaje obtenerViaje(int idViaje) throws SQLException {
+        Viaje viaje = new Viaje();
+        String sql = "SELECT * FROM lab8_bulbasaur.viaje \n" +
+                "WHERE idViaje = ?";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmt.setInt(1,idViaje);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+
+                viaje.setIdViaje(rs.getInt(1));
+                viaje.setFechaViaje(rs.getDate(2));
+                viaje.setFechaReserva(rs.getDate(3));
+                viaje.setCostoTotal(rs.getBigDecimal(4));
+                viaje.setPrecioBoleto(rs.getBigDecimal(5));
+                viaje.setCantBoletos(rs.getInt(6));
+                viaje.setIdSeguro(rs.getInt(7));
+                viaje.setCiudadOrigen(rs.getString(8));
+                viaje.setCiudadDestino(rs.getString(9));
+                viaje.setIdUsuario(rs.getInt(10));
+
+                Seguro seguro = new Seguro();
+                seguro.setNombre(rs.getString(11));
+                viaje.setSeguro(seguro);
+            }
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return viaje;
+    }
 
     public ArrayList<Viaje> buscarPorTitle(String textoBuscar, Usuario usuario){
 
@@ -109,6 +198,6 @@ public class ViajeDao extends BaseDao{
 
 
     }
-
-
 }
+
+
