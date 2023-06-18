@@ -33,6 +33,7 @@ public class CrearUsuarioServlet extends HttpServlet {
         if (valida_usuario){
             //si se ha validado que el usuario cumple con lo q pide creare el user
             usuarioDao.guardar(usuario);
+            response.sendRedirect(request.getContextPath() + "/LoginServlet ");
 
         }else{
             System.out.println("no");

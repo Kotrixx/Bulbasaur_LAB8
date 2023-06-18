@@ -8,8 +8,6 @@
 <body class="d-flex">
 <jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session"
              class="com.example.demo.models.beans.Usuario"/>
-<jsp:useBean id="usuarioSession" type="com.example.demo.models.beans.Usuario" scope="session"
-             class="com.example.demo.models.beans.Usuario"/>
 <jsp:useBean id="id" scope="request" type="java.lang.Integer"/>
 
 <div class="container">

@@ -14,6 +14,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.math.BigDecimal;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "MainServlet", value = {"/MainServlet","/main-page"})
 public class MainServlet extends HttpServlet {
@@ -92,7 +95,7 @@ public class MainServlet extends HttpServlet {
 
                     //primero le haré meter su contraseña
                     request.setAttribute("id",Integer.parseInt(id));
-                    request.getRequestDispatcher("confirmacontrasenha.jsp").forward(request, response);
+                    request.getRequestDispatcher("confirmarContrasenha.jsp").forward(request, response);
                     break;
 
                 case "add":
@@ -143,10 +146,15 @@ public class MainServlet extends HttpServlet {
                 session = request.getSession(false);
                 usuario = (Usuario) session.getAttribute("usuarioSession");
 
-                if (contrasenha.equals(usuario.getContrasenha())){
+                System.out.println(contrasenha);
+                System.out.println("contra buena es" + usuario.getContrasenha());
+                String contrainput_hash = convertirAHash(contrasenha);
+                System.out.println("la contra que se puso en hash es : "+ contrainput_hash);
+                if (contrainput_hash.equals(usuario.getContrasenha())){
 
                     try {
                         viajeDao.borrarViaje(Integer.parseInt(id));
+                        System.out.println("se borro creo");
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -235,4 +243,31 @@ public class MainServlet extends HttpServlet {
         }
         return viaje;
     }
+
+
+
+    public static String convertirAHash(String contrasenha) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(contrasenha.getBytes(StandardCharsets.UTF_8));
+
+            // Convertir el hash a una representación en formato hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
 }
